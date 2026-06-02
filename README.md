@@ -92,6 +92,7 @@ https://public.tableau.com/views/CallCenterOperatorPerformanceAnalysis/CallCente
 call-center-operator-performance-analysis/
 
 ├── README.md
+├── Call_Center_Operator_Performance_Analysis.ipynb
 ├── Call_Center_Operator_Performance_Analysis.twbx
 ├── data/
 └── images/
