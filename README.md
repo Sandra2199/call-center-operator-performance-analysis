@@ -82,9 +82,7 @@ An interactive Tableau dashboard was developed to monitor:
 
 ## Interactive Dashboard
 
-Tableau Public Dashboard:
-
-https://public.tableau.com/views/CallCenterOperatorPerformanceAnalysis/CallCenterOperatorPerformanceDashboard
+[View the Interactive Tableau Dashboard](https://public.tableau.com/views/CallCenterOperatorPerformanceAnalysis/CallCenterOperatorPerformanceDashboard)
 
 ## Project Structure
 
