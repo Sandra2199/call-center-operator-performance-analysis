@@ -78,7 +78,7 @@ An interactive Tableau dashboard was developed to monitor:
 
 ## Dashboard Preview
 
-<img width="1317" height="992" alt="dashboard_overview" src="https://github.com/user-attachments/assets/291c866c-891a-4116-8d31-672c8c7a9b7a" />
+![Dashboard Overview](images/dashboard_overview.png)
 
 ## Interactive Dashboard
 
