@@ -93,7 +93,9 @@ call-center-operator-performance-analysis/
 ├── Call_Center_Operator_Performance_Analysis.ipynb
 ├── Call_Center_Operator_Performance_Analysis.twbx
 ├── data/
+│   └── operator_performance_dashboard.csv
 └── images/
+    └── dashboard_overview.png
 ```
 
 ## Skills Demonstrated
