@@ -1,10 +1,10 @@
 # Call Center Operations Performance Analysis
 
-Operational KPI analysis of call-centre activity, focused on service reporting, operator-level review, volume-aware interpretation, and practical decision support.
+Operational KPI analysis of call-center activity, focused on service reporting, operator-level review, volume-aware interpretation, and practical decision support.
 
 ## Quick Access
 
-- [Professional analysis notebook](Call_Center_Operator_Performance_Analysis.ipynb)
+- [Analysis notebook](Call_Center_Operator_Performance_Analysis.ipynb)
 - [Operator KPI output](outputs/operator_kpis.csv)
 - [Weekly system KPI output](outputs/system_week_kpis.csv)
 - [Missed-call concentration output](outputs/operator_missed_call_pareto.csv)
@@ -24,9 +24,9 @@ Missed-call impact was moderately concentrated: **27 operators accounted for 50%
 
 ## Business Problem
 
-Call-centre supervisors need reporting that distinguishes system-level service patterns from operator-level signals. A rate alone can be misleading: an extreme percentage may be based on very few calls, while a high-volume operator can contribute more missed calls despite maintaining a comparatively low rate.
+Call-center supervisors need reporting that distinguishes system-level service patterns from operator-level signals. A rate alone can be misleading: an extreme percentage may be based on very few calls, while a high-volume operator can contribute more missed calls despite maintaining a comparatively low rate.
 
-The professional analysis therefore addresses:
+The analysis therefore addresses:
 
 - What did inbound service performance look like within calls assigned to operators?
 - Which operators contributed most to missed inbound calls?
@@ -40,7 +40,7 @@ The project uses two TripleTen training datasets for the fictional CallMeMaybe v
 
 The source files are not republished here because their redistribution terms have not been independently confirmed. The notebook documents the required schema, and [`data/README.md`](data/README.md) explains how to supply authorized local copies.
 
-Records without `operator_id` were excluded from operator attribution and analyzed separately because their operational meaning is unresolved. Accordingly, the 0.99% missed rate is specifically the rate among **operator-assigned inbound calls**, not an unrestricted all-call-centre rate.
+Records without `operator_id` were excluded from operator attribution and analyzed separately because their operational meaning is unresolved. Accordingly, the 0.99% missed rate is specifically the rate among **operator-assigned inbound calls**, not an unrestricted all-call-center rate.
 
 ## Analytical Approach
 
@@ -105,26 +105,31 @@ An optional 30+ inbound-call view is retained only as an exploratory sensitivity
 - The data does not include scheduled hours, role expectations, routing logic, tenure, call complexity, or assigned workload.
 - Project analytical references are not external performance standards.
 - Findings identify patterns for further review; they do not prove individual employee inefficiency or causation.
-- The current Tableau workbook and Tableau Public dashboard are the original academic versions and contain superseded calculations. They are intentionally excluded from current professional findings pending a later rebuild.
+- The current Tableau workbook and Tableau Public dashboard use the original academic calculations and are excluded from the current findings pending a later rebuild.
 
 ## Deliverables
 
-- Professional Python notebook with corrected and reproducible KPI logic.
+- Python notebook with corrected and reproducible KPI logic.
 - Operator-level KPI table for review and future dashboarding.
 - Weekly system KPI table for trend reporting.
 - Pareto/concentration table for missed-call contribution analysis.
-- Tableau-ready analytical design and exports; professional Tableau rebuild deferred.
+- Tableau-ready analytical exports; Tableau rebuild deferred.
 
 ## Tools and Methods
 
+**Tools**
+
 - Python: pandas, NumPy, matplotlib, seaborn
+- Tableau-ready data preparation
+
+**Methods**
+
 - Data cleaning and validation
 - Weighted KPI calculation
 - Operational reporting
 - Rate-and-volume analysis
 - Pareto/concentration analysis
 - Time-based reporting
-- Tableau-ready data preparation
 
 ## Repository Structure
 
@@ -146,22 +151,20 @@ call-center-operator-performance-analysis/
 └── LICENSE
 ```
 
-Legacy Tableau files remain temporarily in the repository for provenance but are not part of the corrected professional deliverables.
+Legacy Tableau files remain temporarily in the repository for provenance but are not part of the current analytical deliverables.
 
 ## How to Explore
 
 1. Review this README for the business context and findings.
-2. Open the [professional notebook](Call_Center_Operator_Performance_Analysis.ipynb) for the complete calculation logic.
+2. Open the [analysis notebook](Call_Center_Operator_Performance_Analysis.ipynb) for the complete calculation logic.
 3. Use the three files in [`outputs/`](outputs/) to inspect operator KPIs, weekly reporting, and missed-call concentration.
 4. To rerun the analysis, obtain authorized copies of the training datasets and follow [`data/README.md`](data/README.md).
 
 ## Project Context
 
-This project originated as a TripleTen Data Analyst training assignment. The original academic work included hypothesis testing and a Tableau dashboard. The professional rebuild retained the valid data-quality work while correcting the wait-time calculation, removing unsupported employee-performance classifications, and strengthening the operational reporting design.
+This project originated as a TripleTen Data Analyst training assignment. The original academic work included hypothesis testing and a Tableau dashboard. The current version retains the valid data-quality work, corrects the wait-time calculation, removes unsupported employee-performance classifications, and strengthens the operational reporting design.
 
-**Tableau professional rebuild status:** Deferred until after GitHub portfolio completion and the start of job applications.
+---
 
-## Author
-
-Sandra Quinones
-
+**Sandra Quinones**  
+Business & Operations | Reporting & Data Analysis
