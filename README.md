@@ -1,113 +1,165 @@
-# Call Center Operator Performance Analysis
+# Call Center Operations Performance Analysis
 
-## Project Overview
+Operational KPI analysis of call-centre activity, focused on service reporting, operator-level review, volume-aware interpretation, and practical decision support.
 
-This project analyzes call center operator performance using operational KPIs and an interactive Tableau dashboard.
+## Quick Access
 
-The objective was to identify potentially inefficient operators based on missed call rates, wait times, and call activity metrics. The analysis supports operational decision-making by highlighting performance gaps and opportunities for improvement.
+- [Professional analysis notebook](Call_Center_Operator_Performance_Analysis.ipynb)
+- [Operator KPI output](outputs/operator_kpis.csv)
+- [Weekly system KPI output](outputs/system_week_kpis.csv)
+- [Missed-call concentration output](outputs/operator_missed_call_pareto.csv)
+
+## Executive Summary
+
+This project analyzes virtual-telephony activity to understand inbound service performance and provide an operator-review framework without reducing employee performance to one unsupported binary label.
+
+After removing 4,900 exact duplicates from 53,902 source records, the operator-assigned analytical population represented:
+
+- **93,802 inbound calls**, including **926 missed calls**;
+- a **0.99% missed inbound rate** within the operator-assigned population;
+- a **13.15-second call-weighted average inbound wait**;
+- **608,343 outbound calls**, analyzed separately as descriptive activity.
+
+Missed-call impact was moderately concentrated: **27 operators accounted for 50%** of operator-assigned missed calls, while **92 accounted for 80%**. This showed why missed-call rate, absolute missed calls, and call volume need to be reviewed together.
 
 ## Business Problem
 
-Call centers rely on timely responses and efficient operator performance to maintain service quality. Management needs a clear way to identify operators who may require additional support, workload adjustments, or performance monitoring.
+Call-centre supervisors need reporting that distinguishes system-level service patterns from operator-level signals. A rate alone can be misleading: an extreme percentage may be based on very few calls, while a high-volume operator can contribute more missed calls despite maintaining a comparatively low rate.
 
-This project addresses the following questions:
+The professional analysis therefore addresses:
 
-* Which operators show signs of inefficient performance?
-* Are missed call rates exceeding acceptable thresholds?
-* Do wait times vary significantly across operators?
-* Which operators should be prioritized for review?
+- What did inbound service performance look like within calls assigned to operators?
+- Which operators contributed most to missed inbound calls?
+- How did missed-call rates change when interpreted alongside call volume?
+- How did inbound volume, missed calls, and waiting time change over time?
+- How did outbound activity vary after accounting for observed active days?
 
-## Tools Used
+## Dataset and Analytical Scope
 
-* Tableau Public
-* Python
-* Pandas
-* NumPy
-* SciPy
-* Statistical Hypothesis Testing
-* Data Visualization
+The project uses two TripleTen training datasets for the fictional CallMeMaybe virtual-telephony service. The primary dataset contains aggregated call records; `calls_count` represents the number of calls within each record.
 
-## Methodology
+The source files are not republished here because their redistribution terms have not been independently confirmed. The notebook documents the required schema, and [`data/README.md`](data/README.md) explains how to supply authorized local copies.
 
-### Data Preparation
+Records without `operator_id` were excluded from operator attribution and analyzed separately because their operational meaning is unresolved. Accordingly, the 0.99% missed rate is specifically the rate among **operator-assigned inbound calls**, not an unrestricted all-call-centre rate.
 
-* Cleaned and validated call center operational data.
-* Standardized variables and handled missing values.
-* Created operator-level performance metrics.
+## Analytical Approach
 
-### KPI Development
+1. Validated source dimensions, schema, missing values, and duplicate records.
+2. Removed exact duplicates while preserving unresolved missing categories.
+3. Distinguished database records from represented calls.
+4. Recalculated waiting time using represented call volume.
+5. Developed system-, operator-, and week-level KPI tables.
+6. Compared missed-call rate with inbound volume and absolute missed calls.
+7. Added Pareto analysis to measure missed-call concentration.
+8. Kept outbound volume separate from inbound service-quality signals.
 
-The following metrics were calculated:
+## KPI Framework
 
-* Inbound Calls
-* Outbound Calls
-* Missed Inbound Calls
-* Missed Call Rate
-* Average Wait Time
-* Total Calls Handled
+| KPI | Calculation | Operational purpose |
+|---|---|---|
+| Inbound attempts | Sum of `calls_count` for inbound, operator-assigned records | Measure assigned inbound workload |
+| Missed inbound calls | Sum of `calls_count` for inbound missed records | Measure absolute missed demand |
+| Missed inbound rate | Missed inbound calls / inbound attempts | Compare missed-call incidence with volume context |
+| Average inbound wait | Total waiting time / inbound attempts | Measure call-weighted waiting experience |
+| Missed-call contribution | Operator missed calls / all assigned-operator missed calls | Identify operational impact |
+| Outbound calls per active day | Outbound calls / observed outbound-active days | Describe activity with exposure context |
 
-### Statistical Analysis
+The optional 10% missed-rate line is a **project analytical reference**, not an SLA, industry benchmark, TripleTen-prescribed threshold, or validated performance standard.
 
-Two hypotheses were tested:
+## Key Results
 
-1. Whether the overall missed call rate exceeded the 10% business threshold.
-2. Whether wait times differed significantly across operators.
+| Result | Operator-assigned population |
+|---|---:|
+| Inbound attempts | 93,802 |
+| Missed inbound calls | 926 |
+| Missed inbound rate | 0.99% |
+| Average inbound wait per represented call | 13.15 seconds |
+| Outbound calls | 608,343 |
+| Operators with inbound activity | 754 |
+| Operators with outbound activity | 882 |
 
-Methods used:
+## Operational Insights
 
-* One-sample z-test for proportions
-* Kruskal–Wallis test
-* Mann–Whitney U post-hoc comparisons with Holm correction
+- Rate-based and impact-based prioritization produced different operator views. The 33 operators above the project’s optional 10% reference contributed only 15.12% of assigned-operator missed calls, and their median inbound volume was eight calls.
+- Twenty-seven operators accounted for half of assigned-operator missed calls. Reviewing absolute contribution alongside rate provides a more practical investigation starting point.
+- Corrected weekly average wait remained within a relatively narrow range across complete weeks even as observed inbound volume and active-operator coverage increased.
+- Outbound activity was highly dispersed, but the data does not establish expected outbound responsibilities, scheduled hours, tenure, or assigned workload. It is therefore reported descriptively rather than treated as proof of inefficiency.
 
-### Dashboard Design
+## Operator Review Framework
 
-An interactive Tableau dashboard was developed to monitor:
+The project does not publish one definitive “inefficient operator” count. Operators are reviewed through multiple signals:
 
-* Operator efficiency
-* Wait time performance
-* Missed call rates
-* High-risk operators requiring intervention
+- inbound volume;
+- missed inbound calls;
+- missed inbound rate;
+- share of total missed calls;
+- average wait per represented call;
+- active inbound days and weekly patterns;
+- separate outbound activity context.
 
-## Key Findings
+An optional 30+ inbound-call view is retained only as an exploratory sensitivity view—not an official eligibility rule.
 
-* 72 operators (6.6%) were identified as potentially inefficient.
-* Average wait time was 57.6 seconds.
-* The overall missed call rate remained below the 10% business threshold.
-* Significant differences in wait times were observed between operators.
-* Several operators exceeded the 180-second wait time threshold.
+## Limitations
 
-## Dashboard Preview
+- Missing operator identifiers cannot be assigned to employees or interpreted operationally without additional source documentation.
+- The data does not include scheduled hours, role expectations, routing logic, tenure, call complexity, or assigned workload.
+- Project analytical references are not external performance standards.
+- Findings identify patterns for further review; they do not prove individual employee inefficiency or causation.
+- The current Tableau workbook and Tableau Public dashboard are the original academic versions and contain superseded calculations. They are intentionally excluded from current professional findings pending a later rebuild.
 
-![Dashboard Overview](images/dashboard_overview.png)
+## Deliverables
 
-## Interactive Dashboard
+- Professional Python notebook with corrected and reproducible KPI logic.
+- Operator-level KPI table for review and future dashboarding.
+- Weekly system KPI table for trend reporting.
+- Pareto/concentration table for missed-call contribution analysis.
+- Tableau-ready analytical design and exports; professional Tableau rebuild deferred.
 
-[View the Interactive Tableau Dashboard](https://public.tableau.com/views/CallCenterOperatorPerformanceAnalysis/CallCenterOperatorPerformanceDashboard)
+## Tools and Methods
 
-## Project Structure
+- Python: pandas, NumPy, matplotlib, seaborn
+- Data cleaning and validation
+- Weighted KPI calculation
+- Operational reporting
+- Rate-and-volume analysis
+- Pareto/concentration analysis
+- Time-based reporting
+- Tableau-ready data preparation
+
+## Repository Structure
 
 ```text
 call-center-operator-performance-analysis/
-
 ├── README.md
 ├── Call_Center_Operator_Performance_Analysis.ipynb
-├── Call_Center_Operator_Performance_Analysis.twbx
 ├── data/
-│   └── operator_performance_dashboard.csv
-└── images/
-    └── dashboard_overview.png
+│   └── README.md
+├── outputs/
+│   ├── operator_kpis.csv
+│   ├── operator_missed_call_pareto.csv
+│   └── system_week_kpis.csv
+├── docs/
+│   ├── tableau-status.md
+│   └── academic-history/
+│       ├── README.md
+│       └── Call_Center_Operator_Performance_Analysis_Academic.ipynb
+└── LICENSE
 ```
 
-## Skills Demonstrated
+Legacy Tableau files remain temporarily in the repository for provenance but are not part of the corrected professional deliverables.
 
-* KPI Development
-* Business Analytics
-* Operational Performance Monitoring
-* Dashboard Design
-* Statistical Testing
-* Data Visualization
-* Tableau Public
-* Data Storytelling
+## How to Explore
+
+1. Review this README for the business context and findings.
+2. Open the [professional notebook](Call_Center_Operator_Performance_Analysis.ipynb) for the complete calculation logic.
+3. Use the three files in [`outputs/`](outputs/) to inspect operator KPIs, weekly reporting, and missed-call concentration.
+4. To rerun the analysis, obtain authorized copies of the training datasets and follow [`data/README.md`](data/README.md).
+
+## Project Context
+
+This project originated as a TripleTen Data Analyst training assignment. The original academic work included hypothesis testing and a Tableau dashboard. The professional rebuild retained the valid data-quality work while correcting the wait-time calculation, removing unsupported employee-performance classifications, and strengthening the operational reporting design.
+
+**Tableau professional rebuild status:** Deferred until after GitHub portfolio completion and the start of job applications.
 
 ## Author
 
