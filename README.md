@@ -134,7 +134,7 @@ An optional 30+ inbound-call view is retained only as an exploratory sensitivity
 ## Repository Structure
 
 ```text
-call-center-operator-performance-analysis/
+call-center-operational-kpi-analysis/
 ├── README.md
 ├── Call_Center_Operator_Performance_Analysis.ipynb
 ├── data/
